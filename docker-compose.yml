@@ -1,0 +1,43 @@
+version: "3.1"
+services:
+
+#  mariadb:
+#    image: mariadb:10.1
+#    container_name: restaurantapp-mariadb
+#    working_dir: /application
+#    volumes:
+#      - .:/application:cached
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=rootpassword
+#      - MYSQL_DATABASE=restaurantapp
+#      - MYSQL_USER=restaurantappuser
+#      - MYSQL_PASSWORD=restaurantapppassword
+#    ports:
+#      - "11003:3306"
+
+  webserver:
+    image: nginx:alpine
+    container_name: docker-setup-test-webserver
+    working_dir: /application
+    volumes:
+      - .:/application:cached
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "10003:80"
+
+  node-encore:
+    build: docker/node-build
+    container_name: docker-setup-test-node-encore
+    entrypoint: ["docker/node-build/entrypoint.sh"]
+    working_dir: /application
+    volumes:
+      - .:/application:cached
+
+  php-fpm:
+    build: docker/php-fpm
+    container_name: docker-setup-test-php-fpm
+    working_dir: /application
+    entrypoint: ["docker/php-fpm/entrypoint.sh"]
+    volumes:
+      - .:/application:cached
+      - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
