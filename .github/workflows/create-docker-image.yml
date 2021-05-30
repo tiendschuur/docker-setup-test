@@ -13,10 +13,10 @@ jobs:
     steps:
       - name: create run number
         id: run_number
-        run: echo "::set-output name=run_number::$GITHUB_RUN_NUMBER"
+        run: echo "::set-output name=run_number::v1.0.$GITHUB_RUN_NUMBER"
       - name: Build (and push)
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: false
-          tags: zbrag/create-docker-image:latest,zbrag/create-docker-image:v1.0.{{ run_number }}
+          tags: zbrag/create-docker-image:latest,zbrag/create-docker-image:${{ run_number }}
