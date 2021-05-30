@@ -12,16 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create version number
-        run: echo "::set-env name=version::$(echo 'v1.0.${{github.run_number}}')"
-      - name: Get docker image version
-        id: run_number
-        run:  |
-          VERSION="v1.0.${$GITHUB_RUN_NUMBER"
-          echo "::set-output name=version::${VERSION}"
+        run: echo "version=$(echo 'v1.0.${{github.run_number}}')" >> $GITHUB_ENV
       - name: Build (and push)
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: false
-          tag_name: zbrag/create-docker-image:latest,zbrag/create-docker-image:${{ steps.run_number.outputs.version }}
+          tag_name: zbrag/create-docker-image:latest,zbrag/create-docker-image:${{ env.version }}
 
