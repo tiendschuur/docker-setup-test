@@ -11,9 +11,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate build number
-        uses: einaregilsson/build-number@v2
-        with:
-          token: ${{secrets.github_token}}
-      - name: Print new build number
-        run: echo "Build number is $BUILD_NUMBER"
+      - name: Print new run number
+        run: echo "Run number is $GITHUB_RUN_NUMBER, Run id $GITHUB_RUN_ID"
