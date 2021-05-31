@@ -19,4 +19,10 @@ jobs:
         with:
           push: false
           tags: zbrag/create-docker-image:latest,zbrag/create-docker-image:${{ env.version }}
-
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.version }}
+          release_name: Release ${{ env.version }}
