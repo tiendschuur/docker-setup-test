@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: zbrag/create-docker-image:latest,zbrag/create-docker-image:${{ env.version }}
+          tags: tiendschuur/create-docker-image:latest,tiendschuur/create-docker-image:${{ env.version }}
       - name: Create a GitHub release
         uses: actions/create-release@v1
         env:
