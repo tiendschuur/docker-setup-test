@@ -10,9 +10,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
     steps:
       - name: create version number
         run: echo "version=$(echo 'v1.0.${{github.run_number}}')" >> $GITHUB_ENV
@@ -30,9 +27,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: .
           push: true
-          tags: tiendschuur/create-docker-image:latest,tiendschuur/create-docker-image:${{ env.version }}
+          tags: ghcr.io/tiendschuur/create-docker-image:latest,ghcr.io/tiendschuur/create-docker-image:${{ env.version }}
 
       - name: Create a GitHub release
         uses: actions/create-release@v1
