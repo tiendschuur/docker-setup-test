@@ -36,3 +36,5 @@ RUN rm -rf /var/cache/apk
 COPY bin config public src templates translations /application/
 COPY --from=vendor /app/vendor/ /application/vendor/
 COPY --from=frontend /app/public/build/ /application/public/build/
+
+EXPOSE 80
