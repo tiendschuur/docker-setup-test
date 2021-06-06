@@ -38,3 +38,5 @@ COPY --from=vendor /app/vendor/ /application/vendor/
 COPY --from=frontend /app/public/build/ /application/public/build/
 
 EXPOSE 80
+
+CMD /usr/sbin/php-fpm -R --nodaemonize
