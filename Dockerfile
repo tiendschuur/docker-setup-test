@@ -33,7 +33,7 @@ RUN yarn install && yarn run encore prod
 FROM php:8-fpm-alpine
 WORKDIR /application
 RUN rm -rf /var/cache/apk
-COPY bin config public src templates translations /application/
+COPY bin config public src templates docker translations /application/
 COPY --from=vendor /app/vendor/ /application/vendor/
 COPY --from=frontend /app/public/build/ /application/public/build/
 
