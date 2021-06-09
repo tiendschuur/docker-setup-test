@@ -3,7 +3,7 @@
 #
 
 FROM composer:2 as vendor
-WORKDIR /application
+WORKDIR /app
 
 COPY composer.json composer.json
 COPY composer.lock composer.lock
@@ -33,9 +33,9 @@ RUN yarn install && yarn run encore prod
 FROM php:8-fpm-alpine
 WORKDIR /application
 RUN rm -rf /var/cache/apk
-COPY bin config public src templates docker translations /application/
-COPY --from=vendor /application/vendor/ /application/vendor/
-COPY --from=frontend /app/public/build/ /application/public/build/
+COPY bin config public src templates docker translations ./
+COPY --from=vendor /app/vendor/ ./vendor/
+COPY --from=frontend /app/public/build/ ./public/build/
 
 #EXPOSE 80
 
