@@ -34,9 +34,9 @@ FROM php:8-fpm-alpine
 WORKDIR /application
 RUN rm -rf /var/cache/apk
 
-COPY . /application
-COPY --from=vendor /app/vendor/ /application/vendor/
-COPY --from=frontend /app/public/build/ /application/public/build/
+COPY . /var/www/html
+COPY --from=vendor /app/vendor/ /var/www/html/vendor/
+COPY --from=frontend /app/public/build/ /var/www/html/public/build/
 
 
 #EXPOSE 80
