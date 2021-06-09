@@ -3,7 +3,7 @@
 #
 
 FROM composer:2 as vendor
-WORKDIR /app
+WORKDIR /application
 
 COPY composer.json composer.json
 COPY composer.lock composer.lock
@@ -34,9 +34,9 @@ FROM php:8-fpm-alpine
 WORKDIR /application
 RUN rm -rf /var/cache/apk
 COPY bin config public src templates docker translations /application/
-COPY --from=vendor /app/vendor/ /application/vendor/
+COPY --from=vendor /application/vendor/ /application/vendor/
 COPY --from=frontend /app/public/build/ /application/public/build/
 
-EXPOSE 80
+#EXPOSE 80
 
 #CMD /usr/sbin/php-fpm -R --nodaemonize
