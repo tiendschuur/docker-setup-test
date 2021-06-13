@@ -58,7 +58,6 @@ jobs:
           context: docker/nginx/Dockerfile
           push: true
           tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
-
       - name: Create a GitHub release
         uses: actions/create-release@v1
         env:
