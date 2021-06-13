@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  base:
     runs-on: ubuntu-latest
     steps:
       - name: create version number
@@ -22,13 +22,35 @@ jobs:
             registry: ghcr.io
             username: ${{ github.repository_owner }}
             password: ${{ secrets.GITHUB_TOKEN }}
-#             driver: docker
+  php-fpm:
+    runs-on: ubuntu-latest
+    steps:
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
+          context: ./Dockerfile
           push: true
-          tags: ghcr.io/tiendschuur/create-docker-image:latest,ghcr.io/tiendschuur/create-docker-image:${{ env.version }}
+          tags: ghcr.io/tiendschuur/create-docker-php-fpm:latest,ghcr.io/tiendschuur/create-docker-php-fpm:${{ env.version }}
+
+      - name: Create a GitHub release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.version }}
+          release_name: Release ${{ env.version }}
+
+  nginx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: docker/nginx/Dockerfile
+          push: true
+          tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
 
       - name: Create a GitHub release
         uses: actions/create-release@v1
