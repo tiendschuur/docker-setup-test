@@ -1,3 +1,3 @@
 FROM nginx
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY ../.. /application
+COPY /application/docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY /application /application
