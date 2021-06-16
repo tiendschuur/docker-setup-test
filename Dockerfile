@@ -25,14 +25,20 @@ COPY assets/ /app/assets/
 
 WORKDIR /app
 
-RUN yarn install && yarn run encore prod
+RUN yarn install && yarn run encore prod && ls -la /app/public/build
 
 #
 # Application
 #
-FROM trafex/php-nginx
+FROM php:8-fpm-alpine
 WORKDIR /application
 RUN rm -rf /var/cache/apk
-COPY bin config public src templates translations /application/
-COPY --chown=nginx --from=vendor /app/vendor/ /application/vendor/
-COPY --chown=nginx --from=frontend /app/public/build/ /application/public/build/
+
+COPY . /var/www/html
+COPY --from=vendor /app/vendor/ /var/www/html/vendor/
+COPY --from=frontend /app/public/build/ /var/www/html/public/build/
+
+
+#EXPOSE 80
+
+#CMD /usr/sbin/php-fpm -R --nodaemonize
