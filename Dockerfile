@@ -30,9 +30,8 @@ RUN yarn install && yarn run encore prod && ls -la /app/public/build
 #
 # Application
 #
-FROM php:8-fpm-alpine
+FROM trafex/php-nginx
 WORKDIR /application
-RUN rm -rf /var/cache/apk
 
 COPY . /var/www/html
 COPY --from=vendor /app/vendor/ /var/www/html/vendor/
