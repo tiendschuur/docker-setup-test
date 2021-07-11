@@ -10,9 +10,9 @@ FROM node:14-alpine as frontend
 COPY ../../../../package.json webpack.config.js yarn.lock /app/
 COPY ../../../../assets /app/assets/
 
-WORKDIR /app
+WORKDIR /application
 
-RUN yarn install && yarn run encore prod && ls -la /app/public/build
+RUN yarn install && yarn run encore prod && ls -la /application/public/build
 
 #
 # Application
@@ -23,5 +23,5 @@ RUN rm -rf /var/cache/apk && mkdir /application/var && chmod 777 /application/va
 
 COPY ../../../.. /application
 COPY /application/docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=frontend /app/public/build/ /application/public/build/
+COPY --from=frontend /application/public/build/ /application/public/build/
 
