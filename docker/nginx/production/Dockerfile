@@ -6,11 +6,10 @@
 # Frontend
 #
 FROM node:14-alpine as frontend
+WORKDIR /application
 
 COPY ../../../../package.json webpack.config.js yarn.lock /application/
 COPY ../../../../assets /app/assets/
-
-WORKDIR /application
 
 RUN yarn install && yarn run encore prod && ls -la /application/public/build
 
