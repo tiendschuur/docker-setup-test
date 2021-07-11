@@ -22,6 +22,6 @@ WORKDIR /application
 RUN rm -rf /var/cache/apk && mkdir /application/var && chmod 777 /application/var
 
 COPY ../../../.. /application
-#COPY ./../nginx.conf /etc/nginx/conf.d/default.conf
+COPY /application/docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=frontend /app/public/build/ /application/public/build/
 
