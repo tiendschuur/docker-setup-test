@@ -33,7 +33,7 @@ RUN yarn install && yarn run encore prod && ls -la /app/public/build
 #
 FROM php:8-fpm-alpine
 WORKDIR /application
-RUN rm -rf /var/cache/apk
+RUN rm -rf /var/cache/apk && mkdir /application/var && chmod 777 /application/var
 
 COPY . /application
 COPY --from=vendor /app/vendor/ /application/vendor/
