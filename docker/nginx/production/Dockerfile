@@ -9,6 +9,7 @@ FROM node:14-alpine as frontend
 
 COPY ../../../../package.json webpack.config.js yarn.lock /app/
 COPY ../../../../assets /app/assets/
+COPY ../nginx.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /app
 
