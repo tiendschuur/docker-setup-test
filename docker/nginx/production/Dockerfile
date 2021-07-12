@@ -6,8 +6,12 @@
 # Frontend
 #
 FROM node:14-alpine as frontend
-WORKDIR /application
+WORKDIR /app
 
+COPY ../../../package.json package.json
+COPY ../../../webpack.config.js webpack.config.js
+COPY ../../../yarn.lock yarn.lock
+COPY ../../../assets assets
 
 #COPY ./package.json package.json
 #COPY package.json /application/package.json
