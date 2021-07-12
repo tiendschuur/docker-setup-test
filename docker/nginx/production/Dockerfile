@@ -20,7 +20,7 @@ COPY ../../../assets assets
 #COPY ./../../../assets assets
 #COPY ../../.. /application
 
-RUN yarn install && yarn run encore prod && ls -la /application/public/build
+RUN yarn install && yarn run encore prod && ls -la /app/public/build
 
 #
 # Application
