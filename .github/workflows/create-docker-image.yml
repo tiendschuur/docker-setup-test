@@ -25,7 +25,8 @@ jobs:
         id: docker_build_php
         uses: docker/build-push-action@v2
         with:
-          file: docker/php-fpm/production/Dockerfile
+          file: docker/production/Dockerfile
+          target: php-fpm
           push: true
           tags: ghcr.io/tiendschuur/create-docker-php-fpm:latest,ghcr.io/tiendschuur/create-docker-php-fpm:${{ env.version }}
 
@@ -55,6 +56,7 @@ jobs:
         id: docker_build_nginx
         uses: docker/build-push-action@v2
         with:
-          file: docker/nginx/production/Dockerfile
+          file: docker/production/Dockerfile
           push: true
+          target: nginx
           tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
