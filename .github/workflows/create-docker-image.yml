@@ -22,7 +22,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
-        id: docker_build
+        id: docker_build_php
         uses: docker/build-push-action@v2
         with:
           file: docker/php-fpm/production/Dockerfile
@@ -52,7 +52,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
-        id: docker_build
+        id: docker_build_nginx
         uses: docker/build-push-action@v2
         with:
           file: ./docker/nginx/production/Dockerfile
