@@ -47,6 +47,5 @@ FROM php:8-fpm-alpine as php-fpm
 WORKDIR /application
 RUN rm -rf /var/cache/apk && mkdir /application/var && chmod 777 /application/var
 
-COPY docker/production /application
 COPY --from=composer /app/vendor/ /application/vendor/
 COPY --from=frontend /app/public/build/ /application/public/build/
