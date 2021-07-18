@@ -57,4 +57,5 @@ jobs:
         with:
           file: docker/nginx/production/Dockerfile
           push: true
+          context: .
           tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
