@@ -55,7 +55,14 @@ jobs:
         id: docker_build_nginx
         uses: docker/build-push-action@v2
         with:
-          file: ./docker/nginx/production/Dockerfile
+          file: docker/nginx/production/Dockerfile
           push: true
-          context: .
-          tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
+          tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}}
+#      - name: Build and push
+#        id: docker_build_nginx
+#        uses: docker/build-push-action@v2
+#        with:
+#          file: ./docker/nginx/production/Dockerfile
+#          push: true
+#          context: .
+#          tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
