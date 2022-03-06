@@ -1,4 +1,4 @@
-FROM composer:2 AS composer
+FROM composer:2.2 AS composer
 
 FROM php:8.0-fpm
 WORKDIR "/application"

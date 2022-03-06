@@ -26,7 +26,7 @@ COPY ./docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./public/ /application/public/
 COPY --from=frontend /app/public/build/ /application/public/build/
 
-FROM composer:2 as composer
+FROM composer:2.2 as composer
 WORKDIR /app
 
 COPY ./composer.json composer.json

@@ -11,10 +11,19 @@ services:
     ports:
       - "10003:80"
 
+  node:
+    build: docker/node
+    container_name: docker-setup-test-node
+    entrypoint: ["docker/node/entrypoint.sh"]
+    working_dir: /application
+    volumes:
+      - .:/application:cached
+
   php-fpm:
-    image: ghcr.io/tiendschuur/create-docker-image:latest
+    build: docker/php-fpm
     container_name: docker-setup-test-php-fpm
     working_dir: /application
+    entrypoint: ["docker/php-fpm/entrypoint.sh"]
     volumes:
       - .:/application:cached
       - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
