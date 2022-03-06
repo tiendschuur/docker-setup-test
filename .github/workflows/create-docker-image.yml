@@ -37,6 +37,11 @@ jobs:
         with:
           tag_name: ${{ env.version }}
           release_name: Release ${{ env.version }}
+      - uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   nginx:
     runs-on: ubuntu-latest
@@ -60,3 +65,8 @@ jobs:
           push: true
           target: nginx
           tags: ghcr.io/tiendschuur/create-docker-nginx:latest,ghcr.io/tiendschuur/create-docker-nginx:${{ env.version }}
+      - uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
