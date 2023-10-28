@@ -12,7 +12,7 @@ services:
       - "10003:80"
 
   node:
-    build: docker/node
+    image: node:16
     container_name: docker-setup-test-node
     entrypoint: ["docker/node/entrypoint.sh"]
     working_dir: /application
